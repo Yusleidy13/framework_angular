@@ -1,0 +1,296 @@
+<mat-sidenav-container class="contenedor">
+
+  <!-- MENÚ LATERAL -->
+
+  <mat-sidenav
+    #sidenav
+    mode="side"
+    opened
+    class="sidenav">
+
+
+    <!-- LOGO -->
+
+    <div class="logo">
+
+      <mat-icon>
+        school
+      </mat-icon>
+
+      <span>
+        Control Escolar
+      </span>
+
+    </div>
+
+
+    <mat-divider></mat-divider>
+
+
+    <!-- USUARIO -->
+
+    <div class="usuario">
+
+      <mat-icon>
+        account_circle
+      </mat-icon>
+
+      <div>
+
+        <strong>
+          {{ authService.obtenerUsuarioActual()?.nombre }}
+        </strong>
+
+        <small>
+          {{ authService.obtenerRolActual() }}
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <mat-divider></mat-divider>
+
+
+    <!-- MENÚ -->
+
+    <mat-nav-list>
+
+
+      <!-- INICIO -->
+
+      <a
+        mat-list-item
+        routerLink="/inicio"
+        routerLinkActive="activo">
+
+        <mat-icon matListItemIcon>
+          home
+        </mat-icon>
+
+        <span matListItemTitle>
+          Inicio
+        </span>
+
+      </a>
+
+
+      <!-- CATÁLOGOS -->
+
+      <div class="seccion">
+        Catálogos
+      </div>
+
+
+      <a
+        mat-list-item
+        routerLink="/estados"
+        routerLinkActive="activo">
+
+        <mat-icon matListItemIcon>
+          public
+        </mat-icon>
+
+        <span matListItemTitle>
+          Estados
+        </span>
+
+      </a>
+
+
+      <a
+        mat-list-item
+        routerLink="/municipios"
+        routerLinkActive="activo">
+
+        <mat-icon matListItemIcon>
+          location_city
+        </mat-icon>
+
+        <span matListItemTitle>
+          Municipios
+        </span>
+
+      </a>
+
+
+      <a
+        mat-list-item
+        routerLink="/localidades"
+        routerLinkActive="activo">
+
+        <mat-icon matListItemIcon>
+          location_on
+        </mat-icon>
+
+        <span matListItemTitle>
+          Localidades
+        </span>
+
+      </a>
+
+
+      <a
+        mat-list-item
+        routerLink="/carreras"
+        routerLinkActive="activo">
+
+        <mat-icon matListItemIcon>
+          school
+        </mat-icon>
+
+        <span matListItemTitle>
+          Carreras
+        </span>
+
+      </a>
+
+
+      <a
+        mat-list-item
+        routerLink="/generos"
+        routerLinkActive="activo">
+
+        <mat-icon matListItemIcon>
+          people
+        </mat-icon>
+
+        <span matListItemTitle>
+          Géneros
+        </span>
+
+      </a>
+
+
+      <a
+        mat-list-item
+        routerLink="/tipos-personal"
+        routerLinkActive="activo">
+
+        <mat-icon matListItemIcon>
+          badge
+        </mat-icon>
+
+        <span matListItemTitle>
+          Tipos de personal
+        </span>
+
+      </a>
+
+
+      <!-- REGISTROS -->
+
+      <div class="seccion">
+        Registros
+      </div>
+
+
+      <a
+        mat-list-item
+        routerLink="/alumnos"
+        routerLinkActive="activo">
+
+        <mat-icon matListItemIcon>
+          school
+        </mat-icon>
+
+        <span matListItemTitle>
+          Alumnos
+        </span>
+
+      </a>
+
+
+      <a
+        mat-list-item
+        routerLink="/personal"
+        routerLinkActive="activo">
+
+        <mat-icon matListItemIcon>
+          groups
+        </mat-icon>
+
+        <span matListItemTitle>
+          Personal
+        </span>
+
+      </a>
+
+
+      <!-- INFORMACIÓN -->
+
+      <div class="seccion">
+        Información
+      </div>
+
+
+      <a
+        mat-list-item
+        routerLink="/datos-escuela"
+        routerLinkActive="activo">
+
+        <mat-icon matListItemIcon>
+          business
+        </mat-icon>
+
+        <span matListItemTitle>
+          Datos de la escuela
+        </span>
+
+      </a>
+
+
+
+    </mat-nav-list>
+
+
+    <!-- LOGOUT -->
+
+    <div class="logout">
+
+      <mat-divider></mat-divider>
+
+      <button
+        mat-list-item
+        class="boton-logout"
+        (click)="cerrarSesion()">
+
+        <mat-icon>
+          logout
+        </mat-icon>
+
+        <span>
+          Cerrar sesión
+        </span>
+
+      </button>
+
+    </div>
+
+
+  </mat-sidenav>
+
+
+  <!-- CONTENIDO -->
+
+  <mat-sidenav-content>
+
+    <mat-toolbar class="toolbar">
+
+      <span>
+        Control Escolar
+      </span>
+
+    </mat-toolbar>
+
+
+    <main class="contenido">
+
+      <router-outlet></router-outlet>
+
+    </main>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

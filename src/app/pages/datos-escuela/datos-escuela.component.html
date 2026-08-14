@@ -1,0 +1,303 @@
+<div class="contenedor">
+
+  <div class="encabezado">
+
+    <div>
+
+      <h1>Datos de la escuela</h1>
+
+      <p>
+        Información general de la institución
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <mat-card>
+
+    <mat-card-header>
+
+      <mat-card-title>
+        Información institucional
+      </mat-card-title>
+
+      <mat-card-subtitle>
+        Registra los datos de la escuela
+      </mat-card-subtitle>
+
+    </mat-card-header>
+
+
+    <mat-card-content>
+
+      <div class="grid">
+
+
+        <!-- CCT -->
+
+        <mat-form-field appearance="outline">
+
+          <mat-label>
+            CCT
+          </mat-label>
+
+          <input
+            matInput
+            maxlength="10"
+            [(ngModel)]="escuela.cct">
+
+        </mat-form-field>
+
+
+        <!-- NOMBRE -->
+
+        <mat-form-field appearance="outline">
+
+          <mat-label>
+            Nombre de la escuela
+          </mat-label>
+
+          <input
+            matInput
+            [(ngModel)]="escuela.nombre">
+
+        </mat-form-field>
+
+
+        <!-- TELEFONO -->
+
+        <mat-form-field appearance="outline">
+
+          <mat-label>
+            Teléfono
+          </mat-label>
+
+          <input
+            matInput
+            maxlength="10"
+            [(ngModel)]="escuela.telefono">
+
+        </mat-form-field>
+
+
+        <!-- EMAIL -->
+
+        <mat-form-field appearance="outline">
+
+          <mat-label>
+            Correo electrónico
+          </mat-label>
+
+          <input
+            matInput
+            type="email"
+            [(ngModel)]="escuela.email">
+
+        </mat-form-field>
+
+
+        <!-- CALLE -->
+
+        <mat-form-field appearance="outline">
+
+          <mat-label>
+            Calle
+          </mat-label>
+
+          <input
+            matInput
+            [(ngModel)]="escuela.calle">
+
+        </mat-form-field>
+
+
+        <!-- NUMERO EXTERIOR -->
+
+        <mat-form-field appearance="outline">
+
+          <mat-label>
+            Número exterior
+          </mat-label>
+
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="escuela.numE">
+
+        </mat-form-field>
+
+
+        <!-- NUMERO INTERIOR -->
+
+        <mat-form-field appearance="outline">
+
+          <mat-label>
+            Número interior
+          </mat-label>
+
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="escuela.numI">
+
+        </mat-form-field>
+
+
+        <!-- CP -->
+
+        <mat-form-field appearance="outline">
+
+          <mat-label>
+            Código postal
+          </mat-label>
+
+          <input
+            matInput
+            maxlength="5"
+            [(ngModel)]="escuela.cp">
+
+        </mat-form-field>
+
+
+        <!-- ESTADO -->
+
+        <mat-form-field appearance="outline">
+
+          <mat-label>
+            Estado
+          </mat-label>
+
+          <mat-select
+            [(ngModel)]="escuela.estadoId"
+            (selectionChange)="cambioEstado()">
+
+            @for (
+              estado of estados;
+              track estado.id
+            ) {
+
+              <mat-option
+                [value]="estado.id">
+
+                {{ estado.nombre }}
+
+              </mat-option>
+
+            }
+
+          </mat-select>
+
+        </mat-form-field>
+
+
+        <!-- MUNICIPIO -->
+
+        <mat-form-field appearance="outline">
+
+          <mat-label>
+            Municipio
+          </mat-label>
+
+          <mat-select
+            [(ngModel)]="escuela.municipioId"
+            (selectionChange)="cambioMunicipio()"
+            [disabled]="!escuela.estadoId">
+
+            @for (
+              municipio of obtenerMunicipiosDelEstado();
+              track municipio.id
+            ) {
+
+              <mat-option
+                [value]="municipio.id">
+
+                {{ municipio.nombre }}
+
+              </mat-option>
+
+            }
+
+          </mat-select>
+
+        </mat-form-field>
+
+
+        <!-- LOCALIDAD -->
+
+        <mat-form-field appearance="outline">
+
+          <mat-label>
+            Localidad
+          </mat-label>
+
+          <mat-select
+            [(ngModel)]="escuela.localidadId"
+            [disabled]="!escuela.municipioId">
+
+            @for (
+              localidad of obtenerLocalidadesDelMunicipio();
+              track localidad.id
+            ) {
+
+              <mat-option
+                [value]="localidad.id">
+
+                {{ localidad.nombre }}
+
+              </mat-option>
+
+            }
+
+          </mat-select>
+
+        </mat-form-field>
+
+
+      </div>
+
+    </mat-card-content>
+
+
+    <mat-card-actions>
+
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="guardar()">
+
+        <mat-icon>
+          save
+        </mat-icon>
+
+        {{ escuelaId
+          ? 'Actualizar datos'
+          : 'Guardar datos'
+        }}
+
+      </button>
+
+
+      @if (escuelaId) {
+
+        <button
+          mat-stroked-button
+          color="warn"
+          (click)="eliminar()">
+
+          <mat-icon>
+            delete
+          </mat-icon>
+
+          Eliminar
+
+        </button>
+
+      }
+
+    </mat-card-actions>
+
+  </mat-card>
+
+</div>

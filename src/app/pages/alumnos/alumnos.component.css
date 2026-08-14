@@ -1,0 +1,95 @@
+.contenedor {
+  padding: 30px;
+  max-width: 1300px;
+  margin: auto;
+}
+
+.encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.encabezado h1 {
+  margin: 0;
+  font-size: 30px;
+}
+
+.encabezado p {
+  margin-top: 5px;
+  color: #666;
+}
+
+.formulario {
+  margin-bottom: 25px;
+  padding: 10px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 20px;
+  margin-top: 20px;
+}
+
+.tabla-card {
+  overflow-x: auto;
+}
+
+.tabla {
+  width: 100%;
+}
+
+th {
+  font-weight: bold;
+}
+
+.activo {
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 13px;
+}
+
+.inactivo {
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 13px;
+}
+
+.sin-datos {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.sin-datos mat-icon {
+  font-size: 50px;
+  width: 50px;
+  height: 50px;
+  margin-bottom: 15px;
+}
+
+.sin-datos p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+@media (max-width: 700px) {
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .encabezado {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+}

@@ -1,0 +1,215 @@
+<div class="contenedor">
+
+  <div class="encabezado">
+
+   
+    <div>
+      <h1>Estados</h1>
+
+      <p>
+        Administración de estados de la República
+      </p>
+    </div>
+
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="nuevoEstado()">
+
+      <mat-icon>add</mat-icon>
+
+      Nuevo estado
+
+    </button>
+
+  </div>
+
+
+  @if (mostrarFormulario) {
+
+    <mat-card class="formulario">
+
+      <mat-card-header>
+
+        <mat-card-title>
+
+          {{ editando
+            ? 'Editar estado'
+            : 'Nuevo estado'
+          }}
+
+        </mat-card-title>
+
+      </mat-card-header>
+
+
+      <mat-card-content>
+
+        <mat-form-field
+          appearance="outline"
+          class="campo">
+
+          <mat-label>
+            Nombre del estado
+          </mat-label>
+
+          <input
+            matInput
+            type="text"
+            [(ngModel)]="estadoSeleccionado.nombre"
+            placeholder="Ej. Hidalgo">
+
+        </mat-form-field>
+
+      </mat-card-content>
+
+
+      <mat-card-actions>
+
+        <button
+          mat-button
+          (click)="cancelar()">
+
+          Cancelar
+
+        </button>
+
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="guardarEstado()">
+
+          <mat-icon>save</mat-icon>
+
+          {{ editando
+            ? 'Actualizar'
+            : 'Guardar'
+          }}
+
+        </button>
+
+      </mat-card-actions>
+
+    </mat-card>
+
+  }
+
+
+  <mat-card class="tabla-card">
+
+    <table
+      mat-table
+      [dataSource]="estados"
+      class="tabla">
+
+
+      <ng-container matColumnDef="nombre">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+
+          Estado
+
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let estado">
+
+          {{ estado.nombre }}
+
+        </td>
+
+      </ng-container>
+
+
+      <ng-container matColumnDef="acciones">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+
+          Acciones
+
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let estado">
+
+          <button
+            mat-icon-button
+            color="primary"
+            (click)="editarEstado(estado)"
+            matTooltip="Editar">
+
+            <mat-icon>
+              edit
+            </mat-icon>
+
+          </button>
+
+
+         @if (authService.esAdministrador()) {
+
+  <button
+    mat-icon-button
+    color="warn"
+    (click)="eliminarEstado(estado)"
+    matTooltip="Eliminar">
+
+    <mat-icon>
+      delete
+    </mat-icon>
+
+  </button>
+
+}
+
+        </td>
+
+      </ng-container>
+
+
+      <tr
+        mat-header-row
+        *matHeaderRowDef="columnas">
+      </tr>
+
+      <tr
+        mat-row
+        *matRowDef="let row; columns: columnas;">
+      </tr>
+
+    </table>
+
+
+    @if (estados.length === 0) {
+
+      <div class="sin-datos">
+
+        <mat-icon>
+          location_on
+        </mat-icon>
+
+        <p>
+          No hay estados registrados.
+        </p>
+
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="nuevoEstado()">
+
+          Agregar primer estado
+
+        </button>
+
+      </div>
+
+    }
+
+  </mat-card>
+
+</div>

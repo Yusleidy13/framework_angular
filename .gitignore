@@ -1,4 +1,4 @@
-# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files
 
 # Compiled output
 /dist
@@ -28,14 +28,25 @@ yarn-error.log
 !.vscode/extensions.json
 .history/*
 
-# Miscellaneous
+# Angular
 /.angular/cache
+
+# Sass
 .sass-cache/
-/connect.lock
+
+# Coverage
 /coverage
+
+# Miscellaneous
+/connect.lock
 /libpeerconnection.log
 testem.log
 /typings
+
+# Environment files
+.env
+.env.*
+!.env.example
 
 # System files
 .DS_Store

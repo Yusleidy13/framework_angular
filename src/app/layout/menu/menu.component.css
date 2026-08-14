@@ -1,0 +1,157 @@
+.contenedor {
+  height: 100vh;
+}
+
+
+.sidenav {
+  width: 260px;
+
+  border-right: 1px solid #ddd;
+}
+
+
+.logo {
+  height: 70px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 0 20px;
+
+  font-size: 20px;
+
+  font-weight: 600;
+}
+
+
+.logo mat-icon {
+  font-size: 30px;
+
+  width: 30px;
+
+  height: 30px;
+}
+
+
+.usuario {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 18px;
+}
+
+
+.usuario mat-icon {
+  font-size: 38px;
+
+  width: 38px;
+
+  height: 38px;
+}
+
+
+.usuario div {
+  display: flex;
+
+  flex-direction: column;
+
+  overflow: hidden;
+}
+
+
+.usuario strong {
+  font-size: 14px;
+}
+
+
+.usuario small {
+  margin-top: 3px;
+
+  color: #777;
+}
+
+
+.seccion {
+  padding: 18px 16px 8px;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  color: #777;
+}
+
+
+mat-nav-list a {
+  margin: 3px 8px;
+
+  border-radius: 6px;
+}
+
+
+.activo {
+  background: #e8eaf6 !important;
+
+  color: #3f51b5 !important;
+}
+
+
+.toolbar {
+  height: 64px;
+
+  border-bottom: 1px solid #ddd;
+}
+
+
+.contenido {
+  padding: 0;
+
+  min-height: calc(100vh - 64px);
+
+  background: #fafafa;
+}
+
+
+.logout {
+  position: absolute;
+
+  bottom: 0;
+
+  left: 0;
+
+  width: 100%;
+}
+
+
+.boton-logout {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 16px 20px;
+
+  border: none;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  font-size: 14px;
+}
+
+
+.boton-logout:hover {
+  background: #f5f5f5;
+}

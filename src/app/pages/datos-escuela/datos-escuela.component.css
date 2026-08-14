@@ -1,0 +1,49 @@
+.contenedor {
+  padding: 30px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.encabezado {
+  margin-bottom: 25px;
+}
+
+.encabezado h1 {
+  margin: 0;
+  font-size: 30px;
+}
+
+.encabezado p {
+  margin-top: 5px;
+  color: #666;
+}
+
+mat-card {
+  padding: 10px;
+}
+
+mat-card-header {
+  margin-bottom: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 20px;
+  margin-top: 20px;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 20px;
+}
+
+@media (max-width: 700px) {
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+}

@@ -1,0 +1,425 @@
+<div class="contenedor">
+
+  <div class="encabezado">
+
+    <div>
+
+      <h1>Alumnos</h1>
+
+      <p>
+        Administración de alumnos
+      </p>
+
+    </div>
+
+
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="nuevoAlumno()">
+
+      <mat-icon>
+        person_add
+      </mat-icon>
+
+      Nuevo alumno
+
+    </button>
+
+  </div>
+
+
+  @if (mostrarFormulario) {
+
+    <mat-card class="formulario">
+
+      <mat-card-header>
+
+        <mat-card-title>
+
+          {{ editando
+            ? 'Editar alumno'
+            : 'Nuevo alumno'
+          }}
+
+        </mat-card-title>
+
+      </mat-card-header>
+
+
+      <mat-card-content>
+
+        <div class="grid">
+
+
+          <!-- MATRÍCULA -->
+
+          <mat-form-field
+            appearance="outline">
+
+            <mat-label>
+              Matrícula
+            </mat-label>
+
+            <input
+              matInput
+              [(ngModel)]="
+                alumnoSeleccionado.matricula
+              ">
+
+          </mat-form-field>
+
+
+          <!-- CARRERA -->
+
+          <mat-form-field
+            appearance="outline">
+
+            <mat-label>
+              Carrera
+            </mat-label>
+
+            <mat-select
+              [(ngModel)]="
+                alumnoSeleccionado.carreraId
+              ">
+
+              @for (
+                carrera of carreras;
+                track carrera.id
+              ) {
+
+                <mat-option
+                  [value]="carrera.id">
+
+                  {{ carrera.nombre }}
+
+                </mat-option>
+
+              }
+
+            </mat-select>
+
+          </mat-form-field>
+
+
+          <!-- DATOS PERSONALES -->
+
+          <mat-form-field
+            appearance="outline">
+
+            <mat-label>
+              Alumno
+            </mat-label>
+
+            <mat-select
+              [(ngModel)]="
+                alumnoSeleccionado.datosPersonalesId
+              ">
+
+              @for (
+                dato of datosPersonales;
+                track dato.id
+              ) {
+
+                <mat-option
+                  [value]="dato.id">
+
+                  {{ dato.nombre }}
+                  
+                  
+
+                </mat-option>
+
+              }
+
+            </mat-select>
+
+          </mat-form-field>
+
+
+          <!-- STATUS -->
+
+          <mat-form-field
+            appearance="outline">
+
+            <mat-label>
+              Status
+            </mat-label>
+
+            <mat-select
+              [(ngModel)]="
+                alumnoSeleccionado.status
+              ">
+
+              <mat-option value="A">
+                Activo
+              </mat-option>
+
+              <mat-option value="I">
+                Inactivo
+              </mat-option>
+
+            </mat-select>
+
+          </mat-form-field>
+
+
+        </div>
+
+      </mat-card-content>
+
+
+      <mat-card-actions>
+
+        <button
+          mat-button
+          (click)="cancelar()">
+
+          Cancelar
+
+        </button>
+
+
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="guardarAlumno()">
+
+          <mat-icon>
+            save
+          </mat-icon>
+
+          {{ editando
+            ? 'Actualizar'
+            : 'Guardar'
+          }}
+
+        </button>
+
+      </mat-card-actions>
+
+    </mat-card>
+
+  }
+
+
+  <!-- TABLA -->
+
+  <mat-card class="tabla-card">
+
+    <table
+      mat-table
+      [dataSource]="alumnos"
+      class="tabla">
+
+
+      <!-- MATRÍCULA -->
+
+      <ng-container
+        matColumnDef="matricula">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+
+          Matrícula
+
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let alumno">
+
+          {{ alumno.matricula }}
+
+        </td>
+
+      </ng-container>
+
+
+      <!-- CARRERA -->
+
+      <ng-container
+        matColumnDef="carrera">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+
+          Carrera
+
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let alumno">
+
+          {{ obtenerCarrera(
+            alumno.carreraId
+          ) }}
+
+        </td>
+
+      </ng-container>
+
+
+      <!-- NOMBRE -->
+
+      <ng-container
+        matColumnDef="nombre">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+
+          Nombre
+
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let alumno">
+
+          {{ obtenerNombre(
+            alumno.datosPersonalesId
+          ) }}
+
+        </td>
+
+      </ng-container>
+
+
+      <!-- STATUS -->
+
+      <ng-container
+        matColumnDef="status">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+
+          Status
+
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let alumno">
+
+          @if (alumno.status === 'A') {
+
+            <span class="activo">
+              Activo
+            </span>
+
+          } @else {
+
+            <span class="inactivo">
+              Inactivo
+            </span>
+
+          }
+
+        </td>
+
+      </ng-container>
+
+
+      <!-- ACCIONES -->
+
+      <ng-container
+        matColumnDef="acciones">
+
+        <th
+          mat-header-cell
+          *matHeaderCellDef>
+
+          Acciones
+
+        </th>
+
+        <td
+          mat-cell
+          *matCellDef="let alumno">
+
+
+          <button
+            mat-icon-button
+            color="primary"
+            (click)="editarAlumno(alumno)"
+            matTooltip="Editar">
+
+            <mat-icon>
+              edit
+            </mat-icon>
+
+          </button>
+
+
+          @if (authService.esAdministrador()) {
+
+  <button
+    mat-icon-button
+    color="warn"
+    (click)="eliminarAlumno(alumno)"
+    matTooltip="Eliminar">
+
+    <mat-icon>
+      delete
+    </mat-icon>
+
+  </button>
+
+}
+
+        </td>
+
+      </ng-container>
+
+
+      <tr
+        mat-header-row
+        *matHeaderRowDef="columnas">
+      </tr>
+
+
+      <tr
+        mat-row
+        *matRowDef="
+          let row;
+          columns: columnas;
+        ">
+      </tr>
+
+    </table>
+
+
+    @if (alumnos.length === 0) {
+
+      <div class="sin-datos">
+
+        <mat-icon>
+          school
+        </mat-icon>
+
+        <p>
+          No hay alumnos registrados.
+        </p>
+
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="nuevoAlumno()">
+
+          Agregar primer alumno
+
+        </button>
+
+      </div>
+
+    }
+
+  </mat-card>
+
+</div>

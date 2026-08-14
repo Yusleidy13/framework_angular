@@ -1,0 +1,135 @@
+<div class="container">
+
+  <h1>Municipios</h1>
+
+  <div class="formulario">
+
+    <h2>
+      {{ editando ? 'Editar municipio' : 'Nuevo municipio' }}
+    </h2>
+
+    <div class="campo">
+
+      <label for="nombre">
+        Nombre:
+      </label>
+
+      <input
+        id="nombre"
+        type="text"
+        [(ngModel)]="nombre"
+        placeholder="Nombre del municipio"
+      >
+
+    </div>
+
+
+    <div class="campo">
+
+      <label for="estado">
+        Estado:
+      </label>
+
+      <select
+        id="estado"
+        [(ngModel)]="estadoId"
+      >
+
+        <option value="">
+          Selecciona un estado
+        </option>
+
+        <option
+          *ngFor="let estado of estados"
+          [value]="estado.id"
+        >
+          {{ estado.nombre }}
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="botones">
+
+      <button
+        type="button"
+        (click)="guardarMunicipio()"
+      >
+        {{ editando ? 'Actualizar' : 'Guardar' }}
+      </button>
+
+      <button
+        *ngIf="editando"
+        type="button"
+        (click)="limpiarFormulario()"
+      >
+        Cancelar
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="lista">
+
+    <h2>Municipios registrados</h2>
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Municipio</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr *ngFor="let municipio of municipios">
+
+          <td>
+            {{ municipio.nombre }}
+          </td>
+
+          <td>
+            {{ obtenerNombreEstado(municipio.estadoId) }}
+          </td>
+
+          <td>
+
+            <button
+              type="button"
+              (click)="editarMunicipio(municipio)"
+            >
+              Editar
+            </button>
+
+            @if (authService.esAdministrador()) {
+
+  <button
+    mat-icon-button
+    color="warn"
+    (click)="eliminarMunicipio(municipio.id)"
+    matTooltip="Eliminar">
+
+    Eliminar
+
+  </button>
+
+}
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>

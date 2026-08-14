@@ -1,0 +1,133 @@
+<div class="container">
+
+  <h1>Localidades</h1>
+
+  <div class="formulario">
+
+    <h2>
+      {{ editando ? 'Editar localidad' : 'Nueva localidad' }}
+    </h2>
+
+    <div class="campo">
+
+      <label for="nombre">
+        Nombre:
+      </label>
+
+      <input
+        id="nombre"
+        type="text"
+        [(ngModel)]="nombre"
+        placeholder="Nombre de la localidad"
+      >
+
+    </div>
+
+    <div class="campo">
+
+      <label for="municipio">
+        Municipio:
+      </label>
+
+      <select
+        id="municipio"
+        [(ngModel)]="municipioId"
+      >
+
+        <option value="">
+          Selecciona un municipio
+        </option>
+
+        <option
+          *ngFor="let municipio of municipios"
+          [value]="municipio.id"
+        >
+          {{ municipio.nombre }}
+        </option>
+
+      </select>
+
+    </div>
+
+    <div class="botones">
+
+      <button
+        type="button"
+        (click)="guardarLocalidad()"
+      >
+        {{ editando ? 'Actualizar' : 'Guardar' }}
+      </button>
+
+      <button
+        *ngIf="editando"
+        type="button"
+        (click)="limpiarFormulario()"
+      >
+        Cancelar
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="lista">
+
+    <h2>Localidades registradas</h2>
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Localidad</th>
+          <th>Municipio</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr *ngFor="let localidad of localidades">
+
+          <td>
+            {{ localidad.nombre }}
+          </td>
+
+          <td>
+            {{ obtenerNombreMunicipio(localidad.municipioId) }}
+          </td>
+
+          <td>
+
+            <button
+              type="button"
+              (click)="editarLocalidad(localidad)"
+            >
+              Editar
+            </button>
+
+            @if (authService.esAdministrador()) {
+
+  <button
+    mat-icon-button
+    color="warn"
+    (click)="eliminarLocalidad(localidad.id)"
+    matTooltip="Eliminar">
+
+    Eliminar
+
+  </button>
+
+}
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>

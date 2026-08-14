@@ -1,0 +1,151 @@
+<div class="login-container">
+
+  <mat-card class="login-card">
+
+    <div class="logo">
+
+      <mat-icon>
+        school
+      </mat-icon>
+
+    </div>
+
+
+    <h1>
+      Control Escolar
+    </h1>
+
+    <p class="subtitulo">
+      Inicia sesión para continuar
+    </p>
+
+
+    <form
+      (ngSubmit)="iniciarSesion()">
+
+
+      <!-- CORREO -->
+
+      <mat-form-field
+        appearance="outline"
+        class="campo">
+
+        <mat-label>
+          Correo electrónico
+        </mat-label>
+
+        <mat-icon
+          matPrefix>
+          email
+        </mat-icon>
+
+        <input
+          matInput
+          type="email"
+          name="email"
+          [(ngModel)]="email"
+          autocomplete="username">
+
+      </mat-form-field>
+
+
+      <!-- CONTRASEÑA -->
+
+      <mat-form-field
+        appearance="outline"
+        class="campo">
+
+        <mat-label>
+          Contraseña
+        </mat-label>
+
+        <mat-icon
+          matPrefix>
+          lock
+        </mat-icon>
+
+        <input
+          matInput
+          [type]="
+            mostrarPassword
+              ? 'text'
+              : 'password'
+          "
+          name="password"
+          [(ngModel)]="password"
+          autocomplete="current-password">
+
+
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="cambiarPasswordVisibility()">
+
+          <mat-icon>
+
+            {{
+              mostrarPassword
+                ? 'visibility_off'
+                : 'visibility'
+            }}
+
+          </mat-icon>
+
+        </button>
+
+      </mat-form-field>
+
+
+      <!-- ERROR -->
+
+      @if (error) {
+
+        <div class="error">
+
+          <mat-icon>
+            error
+          </mat-icon>
+
+          <span>
+            {{ error }}
+          </span>
+
+        </div>
+
+      }
+
+
+      <!-- BOTÓN -->
+
+      <button
+        mat-raised-button
+        color="primary"
+        class="boton-login"
+        type="submit"
+        [disabled]="cargando">
+
+
+        @if (cargando) {
+
+          Iniciando sesión...
+
+        } @else {
+
+          Iniciar sesión
+
+        }
+
+      </button>
+
+
+    </form>
+
+
+    <p class="footer">
+      Sistema de Control Escolar
+    </p>
+
+  </mat-card>
+
+</div>
